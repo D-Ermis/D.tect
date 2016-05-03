@@ -55,17 +55,17 @@ def describe_diff(diff, soup):
     return '\n\n'.join(desc)
 
 def send_mail(body, manset):
-    fromaddr = "sinanbirkan03@hotmail.com"
-    toaddr = "ozanertas@gmail.com"
+    fromaddr = "FROMADDR"
+    toaddr = "TOADDR"
     msg = MIMEText(body, 'plain')
     msg['From'] = fromaddr
     msg['To'] = toaddr
     msg['Subject'] = manset
-    server = SMTP('smtp-mail.outlook.com', 587)
+    server = SMTP('smtp.mail.com', 587)
     server.ehlo()
     server.starttls()
     server.ehlo()
-    server.login("sinanbirkan03@hotmail.com", "underground")
+    server.login("FROMADDR", "password")
     server.sendmail(fromaddr, toaddr, msg.as_string())
     server.quit()
 
@@ -82,5 +82,5 @@ def main(index_url, filename):
         pass
     save_site_summary(filename, summary)
 
-main(index_url='http://www.tvgfbf.gov.tr/',
+main(index_url='http://www.site.com/',
      filename='site.txt')
