@@ -36,15 +36,15 @@ def load_site_summary(filename):
 
 def diff(old, new):
     return {
-        'eklendi': new.keys() - old.keys(),
-        'silindi': old.keys() - new.keys(),
-        'degisti': [page for page in set(new.keys()).intersection(old.keys())
+        'added': new.keys() - old.keys(),
+        'deleted': old.keys() - new.keys(),
+        'modified': [page for page in set(new.keys()).intersection(old.keys())
                      if old[page] != new[page]],
     }
 
 def describe_diff(diff, soup):
     desc = []
-    for change in ('eklendi', 'silindi', 'degisti'):
+    for change in ('added', 'deleted', 'modified'):
         if not diff[change]:
             continue
         desc.append('{} bro :{}\n\n{}'.format(
@@ -82,5 +82,4 @@ def main(index_url, filename):
         pass
     save_site_summary(filename, summary)
 
-main(index_url='http://www.site.com/',
-     filename='site.txt')
+main(index_url='http://www.site.com/', filename='site.txt')
